@@ -1,0 +1,38 @@
+<!--<?php print <<<EOT
+-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gbk" />
+<title>信息提示 - PHPWIND数据转换平台</title>
+<link rel="stylesheet" type="text/css" href="template/style.css" />
+</head>
+<body>
+<div>
+	<div id="titlebar">PHPWind 数据转换平台</div>
+	<div class="content">
+		{$msg_info}
+		<div style="text-align:center">
+<!--
+EOT;
+if ($restart){print <<<EOT
+-->
+<br />
+<a href="{$basename}?action={$action}&dbtype={$dbtype}&step={$step}&extra={$extra}" class="restart">请在处理完错误后，点击这里重新开始当前转换步骤</a>
+<!--
+EOT;
+} else {print <<<EOT
+-->
+			<input type="button" onclick="history.go(-1);" value="返回继续操作" class="button" /></div>
+<!--
+EOT;
+} print <<<EOT
+-->
+	</div>
+	<div id="copyright">Copyright &copy;2003 - 2009 PHPWind.com All rights reserved.</div>
+</div>
+</body>
+</html>
+<!--
+EOT;
+?>-->

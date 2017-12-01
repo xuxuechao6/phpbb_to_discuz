@@ -1,0 +1,109 @@
+<!--<?php print <<<EOT
+-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gbk" />
+<title>DISCUZ!NT {$source_version} -> PHPWIND {$pw_version} - PHPWIND数据结构</title>
+<link rel="stylesheet" type="text/css" href="template/style.css" />
+<link rel="stylesheet" type="text/css" href="template/{$dbtype}/{$dbtype}.css" />
+</head>
+<body id="body_main">
+<div id="body">
+	<div id="titlebar">DISCUZ!NT {$source_version} -> PHPWIND {$pw_version} 转换程序</div>
+	<div class="content">
+		<table width="100%" align="center" cellspacing="0" cellpadding="5">
+			<tr>
+				<td colspan="2" align="center"><!--
+EOT;
+$t_array = explode(' ',microtime());
+$spendtime = number_format($t_array[0] + $t_array[1] - $_COOKIE[buildtime], 6);
+setcookie('buildtime','',time()-3600);
+print <<<EOT
+-->
+					<span style="color:#f00;font-weight:bold">恭喜您！由DISCUZ!NT {$source_version} 到 PHPWIND {$pw_version} 的数据库转换工作已经完成。</span>耗时：{$spendtime} (秒)</td>
+			</tr>
+			<tr>
+				<td colspan="2" class="tdheader bg">转换结果分析报告</td>
+			</tr>
+			<tr>
+				<td>
+					<table border="0" cellspacing="1" cellpadding="0" width="100%" class="report">
+                        <tr style="background:#E3E3EA">
+                    		<td width="5%">步骤</td>
+                    		<td width="*">转换项目</td>
+                    		<td width="20%">转换总数</td>
+                    		<td width="15%">成功</td>
+                    		<td width="15%">失败</td>
+                    		<td width="15%">成功率</td>
+							<td width="15%">操作</td>
+                        </tr>
+<!--
+EOT;
+foreach ($_report as $k => $v){print <<<EOT
+-->
+<tr>
+<td>{$k}</td>
+<td>{$v[3]}</td>
+<td>{$v[2]}</td>
+<td>{$v[1]}</td>
+<td><span class="r">{$v[0]}</span></td>
+<td>
+<!--
+EOT;
+$s_per = number_format($v[2] ? (($v[1] / $v[2]) * 100) : 100, 2);
+if ($s_per < 95){
+	$s_per = '<span class="r">'.$s_per.'%</span>';
+}else{
+	$s_per .= '%';
+}
+print <<<EOT
+-->
+$s_per
+</td>
+<td><a href="{$basenmae}?action=compile&dbtype={$dbtype}&a=convert&dostep[]={$k}&a=convert">单独转换</a></td>
+</tr>
+<!--
+EOT;
+} print <<<EOT
+-->
+<tr><td colspan="7" style="padding:10px;">
+<a href="{$basenmae}?action=compile&dbtype={$dbtype}">全部重新转换</a>
+</td></tr>
+                    </table>
+				</td>
+			</tr>
+			<tr>
+				<td colspan="2" class="tdheader">转换后的操作</td>
+			</tr>
+			<tr>
+				<td><br>
+					<ol>
+						<li>以创始人身份进入 PHPWIND 后台到 <span style="color:blue;">缓存数据管理</span> 里更新相应的论坛信息
+						</li>
+						<li>手动将Discuz!NT论坛的附件upload目录下的所有文件移动到PHPWIND论坛的attachment附件目录下.
+						</li>
+						<li>手动将 <span class="r">pwavatar(转换开始时设定)</span> 目录下所有目录文件复制到 PHPWIND 自定义头像目录 attachment/upload。</li>
+						<li>(此步可以忽略不操作)手动将 Discuz!NT 默认头像 avatars/common 目录内的文件移动到 PHPWIND 默认头像目录 images/face。</li>
+						<li>手动将Discuz!NT默认的发贴表情editor/images/smilies下的<span style="color:blue;">default</span>文件夹改名为<span style="color:blue;">dznt</span>并移动到PHPWIND 默认发贴表情images/post/smile文件夹下</li>
+						<li>手动将Discuz!NT自定义发贴表情editor/images/smilies下的文件移动到PHPWIND 默认发贴表情images/post/smile文件夹下</li>
+						<li>如果您转换了<span class="r">勋章</span>
+							<ol>
+								<li>插件管理 -> 勋章中心 设置好相关参数</li>
+								<li>手动将 Discuz!NT images/medals 目录内的勋章图片移动到 PHPWIND 勋章插件图片目录 /hack/medal/image。</li>
+							</ol>
+						</li>
+						<li>在使用 PHPWIND 论坛一段时间，确定数据没有问题后，可以考虑删除 Discuz!NT 数据库表，节约网站空间。</li>
+					</ol></td>
+			</tr>
+		</table>
+	</div>
+	<div id="comments">插件制作: <strong><a href="http://www.phpwind.net/" target="_blank">PHPWind.com</a></strong></div>
+	<div id="copyright">Copyright &copy;2003 - 2009 PHPWind.com All rights reserved.<br />
+	</div>
+</div>
+</body>
+</html>
+<!--
+EOT;
+?>-->

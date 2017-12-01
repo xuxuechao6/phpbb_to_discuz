@@ -1,0 +1,96 @@
+<!--<?php print <<<EOT
+-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gbk" />
+<title>BBSXP -> PHPWIND {$pw_version} - PHPWIND数据结构</title>
+<link rel="stylesheet" type="text/css" href="template/style.css" />
+<link rel="stylesheet" type="text/css" href="template/{$dbtype}/{$dbtype}.css" />
+</head>
+<body id="body_main">
+<div id="body">
+	<div id="titlebar">BBSXP -> PHPWIND {$pw_version} 转换程序</div>
+	<div class="content">
+		<table width="100%" align="center" cellspacing="0" cellpadding="5">
+			<tr>
+				<td colspan="2" align="center"><span class="r bw">恭喜您！由 bbsxp 到 PHPWIND {$pw_version} 的数据库转换工作已经完成。</span>耗时：{$spendtime}</td>
+			</tr>
+			<tr>
+				<td colspan="2" class="tdheader bg">转换结果分析报告</td>
+			</tr>
+			<tr>
+				<td>
+					<table border="0" cellspacing="1" cellpadding="0" width="100%" class="report">
+                        <tr style="background:#E3E3EA">
+                    		<td width="5%">步骤</td>
+                    		<td width="*">转换项目</td>
+                    		<td width="20%">转换总数</td>
+                    		<td width="15%">成功</td>
+                    		<td width="15%">失败</td>
+                    		<td width="15%">成功率</td>
+							<td width="15%">操作</td>
+                        </tr>
+<!--
+EOT;
+foreach ($_report as $k => $v){print <<<EOT
+-->
+<tr>
+<td>{$k}</td>
+<td>{$v[3]}</td>
+<td>{$v[2]}</td>
+<td>{$v[1]}</td>
+<td><span class="r">{$v[0]}</span></td>
+<td>
+<!--
+EOT;
+$s_per = number_format($v[2] ? (($v[1] / $v[2]) * 100) : 100, 2);
+if ($s_per < 95){
+	$s_per = '<span class="r">'.$s_per.'%</span>';
+}else{
+	$s_per .= '%';
+}
+print <<<EOT
+-->
+$s_per
+</td>
+<td><a href="{$basenmae}?action=compile&dbtype={$dbtype}&a=convert&dostep[]={$k}&extra={$v[4]}">单独转换</a></td>
+</tr>
+<!--
+EOT;
+} print <<<EOT
+-->
+<tr><td colspan="7" style="padding:10px;">
+<a href="{$basenmae}?action=compile&dbtype={$dbtype}">全部重新转换</a>
+</td></tr>
+                    </table>
+				</td>
+			</tr>
+			<tr>
+				<td colspan="2" class="tdheader">转换后的操作</td>
+			</tr>
+			<tr>
+				<td>
+					<ol>
+						<li><span style="color:#f00;font-weight:bold">如果您的论坛选择的是sha1加密方式。请将转换程序目录/source/bbsxp2008_access/restore 目录里的 require文件夹 复制到 PHPWIND 安装目录覆盖源文件。</span></li>
+						<li>以创始人身份进入 PHPWIND 后台到 <span class="b">缓存数据管理</span> 里更新相应的论坛信息。</li>
+						<li>手动将 BBSxp论坛 的附件目录UpFile下的UpAttachment文件夹转移到PHPWIND论坛的attachment附件目录下。
+						</li>
+						<li>手动将 BBSxp论坛默认头像 Images/Face目录下的文件转移到PHPWIND默认头像目录images/face。</li>
+						<li>手动将 BBSxp的自定义头像 UpFile/UpFace目录下的文件转移到PHPWIND论坛默认自定义头像目录attachment/upload。</li>
+						<li>手动讲 BBSxp的发帖表情 Images目录下的Emoticons文件夹转移到PHPWIND论坛的Images目录下</li>
+						<li>在使用 PHPWIND 论坛一段时间，确定数据没有问题后，可以考虑删除 Discuz! 数据库表，减少数据库容量，节约数据库空间。</li>
+						</li>
+					</ol>
+				</td>
+			</tr>
+		</table>
+	</div>
+	<div id="comments">插件制作: <strong><a href="http://www.phpwind.net/" target="_blank">PHPWind.com</a></strong> </div>
+	<div id="copyright">Copyright &copy;2003 - 2009 PHPWind.com All rights reserved.</div>
+</div>
+</body>
+</html>
+<!--
+EOT;
+?>-->

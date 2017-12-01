@@ -1,0 +1,4 @@
+
+#42000Unknown database 'discutest'
+
+#42000Unknown database 'discutest'

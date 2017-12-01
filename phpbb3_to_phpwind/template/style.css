@@ -1,0 +1,106 @@
+body{margin: 10px;font:12px verdana;}
+a:link,a:visited,a:active{color:#2222BC;text-decoration:none;}
+a:hover{color:#f90;}
+input{color:#000;background:#fff;border:1px #ccc solid;line-height:20px;height:20px;}
+.button{padding-bottom:5px;height:23px;margin:0 5px;}
+.r{color:#f00;}
+.g{color:#090;}
+.b{color:#00f;}
+.br{background:#f00;}
+.bg{background:#090;}
+.bb{background:#00f;}
+.bw{font-weight:bold;}
+td{text-align:left;}
+#titlebar{color: #738FBF;font-weight:bold;font-size:18px;margin-bottom: 20px;border-bottom: 1px solid #0B198C;}
+.content{padding-bottom: 20px;border-bottom: 1px solid #0B198C;width:100%;}
+.content ul{margin-top: 2px;}
+.content li{margin: 10px;}
+.tdheader{background:#869BBF;color:#fff;}
+#copyright{color: #869BBF;text-align: center;margin-top: 20px;font-size:11px;}
+#comments{margin-top: 30px;border:1px solid #0B198C;padding: 5px;background: #E1E4F2;}
+#comments a:link,#comments a:visited{color: #2222BC;font: 11px tahoma;}
+#submitlinks{font-size:11px;margin: 10px 20px;text-align:center;}
+#submitlinks input,.button{padding-bottom:5px;height:23px;cursor:hand;}
+h1 {font-size: 24px;font-weight: bold;color: #6699cc;}
+.tip {background: #eeffee;padding: 10px;border: 1px solid #ccddcc;}
+.tip h2 {color: #006600;}
+.sql {background: #eeeeff;padding: 10px;border: 1px solid #ccccdd;}
+.sql h2 {color: #0033FF;}
+.error {background: #ffeeee;padding: 10px;border: 1px solid #ddcccc;}
+.error h2 {color: #FF3300;}
+.restart{padding:3px 10px;font-weight:bold}
+.report {border: 1px solid #869BBF; empty-cells: show; border-collapse: collapse;}
+.report td {padding: 4px; border: 1px solid #869BBF; overflow: hidden;text-align:center}
+.checkbox{border:0}
+.clear{overflow:hidden;clear:both;height:0px;}
+
+
+/*自定义添加*/
+#bodyL{
+width:100%;
+margin-right:2px;
+font-weight:bold;
+font-size:12px;
+text-align:center;
+}
+
+#fd{
+width:100%;
+background:#EDF1F8;
+border: 2px solid #849BCA;
+margin-top:2px;
+margin-left:2px;
+overflow:hidden;
+cursor:move;
+text-align:center;
+/*filter:alpha(opacity=50);*/
+}
+.content{
+padding:10px;
+}
+/*统计表样式*/
+.oTable .header {
+background:#E1E4F2 none repeat scroll 0 0;
+color:#1968A1;
+padding:5px 0 2px;
+font-weight:bold;
+text-align:center;
+cursor:hand;
+}
+/*右边QQ导航*/
+.QQbox {
+	Z-INDEX: 99; RIGHT: 0px; WIDTH: 178px; POSITION: absolute; TOP: 40px
+}
+.QQbox .press {
+	RIGHT: 0px; WIDTH: 33px; CURSOR: pointer; BORDER-TOP-STYLE: none; BORDER-RIGHT-STYLE: none; BORDER-LEFT-STYLE: none; POSITION: absolute; HEIGHT: 158px; BORDER-BOTTOM-STYLE: none
+}
+.QQbox .Qlist {
+	BACKGROUND: url(images/qq_listbg.gif) repeat-y -155px 0px; LEFT: 0px; WIDTH: 145px; POSITION: absolute
+}
+.QQbox .Qlist .t {
+	FONT-SIZE: 1px; FLOAT: right; WIDTH: 145px; HEIGHT: 6px
+}
+.QQbox .Qlist .b {
+	FONT-SIZE: 1px; FLOAT: right; WIDTH: 145px; HEIGHT: 6px
+}
+.QQbox .Qlist .t {
+	BACKGROUND: url(images/qq_listbg.gif) no-repeat left 50%
+}
+.QQbox .Qlist .b {
+	BACKGROUND: url(images/qq_listbg.gif) no-repeat right 50%
+}
+.QQbox .Qlist .con {
+	BACKGROUND: #fff; MARGIN: 0px auto; WIDTH: 90%
+}
+.QQbox .Qlist .con H2 {
+	BORDER-RIGHT: #3a708d 1px solid; BORDER-TOP: #3a708d 1px solid; BACKGROUND: url(images/qq_listbg.gif) repeat-y -163px 0px; FONT: bold 12px/22px "宋体"; BORDER-LEFT: #3a708d 1px solid; COLOR: #fff; BORDER-BOTTOM: #3a708d 1px solid; HEIGHT: 22px; TEXT-ALIGN: center
+}
+.QQbox .Qlist .con UL {
+	list-style-type:none;
+}
+.QQbox .Qlist .con UL LI {
+margin-left:-15px;BACKGROUND: #ffffff;  HEIGHT: 20px;
+}
+.QQbox .Qlist .con UL LI.odd {
+	BACKGROUND: #fff;
+}

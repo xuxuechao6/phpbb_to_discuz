@@ -1,0 +1,155 @@
+<!--<?php print <<<EOT
+-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gbk" />
+<title>BBSXP {$source_version} -> PHPWIND {$pw_version} - PHPWIND数据结构</title>
+<link rel="stylesheet" type="text/css" href="template/style.css" />
+<link rel="stylesheet" type="text/css" href="template/{$dbtype}/{$dbtype}.css" />
+</head>
+<body>
+<div>
+	<div id="titlebar">BBSXP {$source_version} -> PHPWIND {$pw_version} 转换程序</div>
+<!--
+EOT;
+if ($submitted){print <<<EOT
+-->
+	<form action="{$basename}?action=compile&dbtype={$dbtype}&a=convert" name="form" method="post">
+	<div class="content">
+		<table width="100%" align="center" cellspacing="0" cellpadding="5">
+			<tr>
+				<td colspan="2" class="tdheader">选择转换内容</td>
+			</tr>
+			<tr>
+				<td colspan="2" style="padding:10px;"><span class="b">提醒：由于转换步骤之间可能会有关联性，在非确认的情况下请选择全部转换。</span></td>
+			</tr>
+<!--
+EOT;
+foreach ($step_data as $k => $v){print <<<EOT
+-->
+			<tr>
+				<td width="20%">{$v}</td>
+				<td><input type="checkbox" name="dostep[]" value="{$k}" checked="checked" class="checkbox" /></td>
+			</tr>
+<!--
+EOT;
+} print <<<EOT
+-->
+		</table>
+	</div>
+	<div id="submitlinks"><input type="submit" name="submit" value="开始转换"></div>
+	</form>
+<!--
+EOT;
+} else {print <<<EOT
+-->
+	<div class="content"><strong>转换说明</strong>
+		<dl>
+			<dd>
+				<ol>
+					<li>本程序只对数据作转换，不会对原来的 BBSXP {$source_version} 数据造成破坏，如果担心 BBSXP {$source_version} 数据丢失，请先作备份，我们不会对任何此类型的数据丢失负责。</li>
+					<li>转换之前请先确认您的服务器已经支持 PHP + MYSQL，如果您还未配置运行环境，我们推荐使用 PHPWind 官方制作的集成安装环境。<br /><br />Windows：<a href="http://www.phpwind.net/read-htm-tid-717902.html" target="_blank">PHPWind Wamp 4.3 正式版</a><br /><br />Linux：<a href="http://www.phpwind.net/read-htm-tid-203668.html" target="_blank">PHPWind LAMP 1.0 正式版</a></li>
+					<li><span class="r">转换程序会清空 PHPWIND {$pw_version} 的数据</span>。转换之前请先安装 PHPWIND {$pw_version}。您可以通过以下连接获得<span class="r">PHPWIND最新版本</span>：<a href="http://www.phpwind.com/download.php" target="_blank">http://www.phpwind.com/download.php</a>。</li>
+					<li>将转换程序以 <span class="b">2进制</span> 方式上传到服务器，运行转换程序：http://您的域名/pwbuilder</li>
+					<li>转换的内容：会员，版块，主题，投票，活动，交易，悬赏，帖子，附件，标签，短消息，公告，表情，好友，收藏主题，友请连接。</li>
+					<li>由于转换过程非常消耗资源，所以建议您尽量在服务器空闲期间进行。</li>
+					<li>正常情况下，转换过程是全自动的，您无需干预，如果转换过程中程序终止运行，<span class="b">请根据出错提示信息进行调整</span>，然后刷新页面继续进行转换。</li>
+					<li><span class="g">请勿将本程序用于商业用途，您可以自由传播它，但务必保留我们的版权信息。</span></li>
+					<li>如果您使用本程序则表明您已接受以上声明。</li>
+				</ol>
+			</dd>
+		</dl>
+	</div>
+	<form action="{$basename}?action=compile&dbtype={$dbtype}&a=config" name="form" method="post">
+	<div class="content">
+		<table width="100%" align="center" cellspacing="0" cellpadding="5">
+			<tr>
+				<td colspan="2" class="tdheader">PHPWIND 配置参数 (*号必填)。如遇不清楚的项目请与您的空间商联系。</td>
+			</tr>
+			<!-- phpwind -->
+			<tr>
+				<td width="20%">数据库地址(<font color="red">*</font>)</td>
+				<td><input type="text" name="pw_db_host" size="20" value="localhost" />&nbsp;一般为 localhost，如果端口非3306，请加上端口号，如：localhost:3307</td>
+			</tr>
+			<tr>
+				<td width="20%">数据库用户名(<font color="red">*</font>)</td>
+				<td><input type="text" name="pw_db_user" size="20" />&nbsp;</td>
+			</tr>
+			<tr>
+				<td width="20%">数据库用户密码(<font color="red">*</font>)</td>
+				<td><input type="text" name="pw_db_password" size="20" />&nbsp;</td>
+			</tr>
+			<tr>
+				<td width="20%">数据库名(<font color="red">*</font>)</td>
+				<td><input type="text" name="pw_db_name" size="20" />&nbsp;</td>
+			</tr>
+			<tr>
+				<td width="20%">数据库表前缀(<font color="red">*</font>)</td>
+				<td><input type="text" name="pw_prefix" size="20" value="pw_" />&nbsp;默认为：pw_</td>
+			</tr>
+			<tr>
+				<td width="20%">数据库字符集(<font color="red">*</font>)</td>
+				<td><select name="dest_charset"><option value="gbk" selected="selected">gbk</option><option value="utf8">utf-8</option><option value="big5">big5</option><option value="latin1">latin1</option></select>&nbsp;建议源程序和安装的PHPWIND编码尽量保持一致，否则可能会出现不可预料的情况。</td>
+			</tr>
+		</table>
+		<!-- BBSxp -->
+		<table width="100%" align="center" cellspacing="0" cellpadding="5">
+		<tr>
+				<td colspan="2" class="tdheader">BBSXP {$source_version} 配置参数 (*号必填)。如遇不清楚的项目请与您的空间商联系。</td>
+			</tr>
+			<tr>
+				<td width="20%">数据库文件名称(<font color="red">*</font>)</td>
+				<td><input type="text" name="source_db_host" size="20" />&nbsp;例如：bbsxp2008.mdb。<font color="red">请手动将 bbsxp2008 数据库文件复制到pwbuilder根目录。</font></td>
+			</tr>
+			<tr>
+				<td width="20%">数据库用户名</td>
+				<td><input type="text" name="source_db_user" size="20" />&nbsp;一般为空</td>
+			</tr>
+			<tr>
+				<td width="20%">数据库用户密码</td>
+				<td><input type="text" name="source_db_password" size="20" />&nbsp;一般为空</td>
+			</tr>
+			<tr>
+				<td width="20%">BBSXP 数据库表前缀(<font color="red">*</font>)</td>
+				<td><input type="text" name="source_db_prefix" size="20" value="BBSXP_" />&nbsp;默认为“BBSXP_”，非确认情况下请勿修改。</td>
+			</tr>
+			<tr>
+				<td width="20%">每次批量处理记录数</td>
+				<td><input type="text" name="percount" size="20" value="1000" />&nbsp;默认为“1000”。</td>
+			</tr>
+			<tr  class="tdheader">
+				<td width="20%" colspan="2">BBSxp 用户积分字段说明（区分大小写）声望：Reputation，金币：UserMoney，经验值：Experience</td>
+			</tr>
+			<tr>
+				<td width="20%">威望字段</td>
+				<td><input type="text" name="rvrc" size="20" value="Reputation" />&nbsp;默认为 Reputation，多个字段请用公式列出，例如：Reputation+UserMoney+4*Experience</td>
+			</tr>
+			<tr>
+				<td width="20%">金钱字段</td>
+				<td><input type="text" name="money" size="20" value="UserMoney" />&nbsp;默认为 UserMoney，多个字段请用公式列出。</td>
+			</tr>
+			<tr>
+				<td width="20%">贡献字段</td>
+				<td><input type="text" name="credit" size="20"  />&nbsp;这里可填写经验值 Experience</td>
+			</tr>
+			<tr>
+				<td width="20%">交易币字段</td>
+				<td><input type="text" name="currency" size="20" />&nbsp;留空不转换。</td>
+			</tr>
+		</table>
+	</div>
+	<div id="submitlinks"><input type="hidden" name="submitted" value="1"><input type="reset" name="reset" value="重新配置">&nbsp;&nbsp;<input type="submit" name="submit" value="下一步"></div>
+	</form>
+<!--
+EOT;
+} print <<<EOT
+-->
+	<div id="comments">插件制作: <strong><a href="http://www.phpwind.net/" target="_blank">PHPWind.com</a></strong></div>
+	<div id="copyright"> Copyright &copy;2003 - 2009 PHPWind.com All rights reserved.</div>
+</div>
+</body>
+</html>
+<!--
+EOT;
+?>-->

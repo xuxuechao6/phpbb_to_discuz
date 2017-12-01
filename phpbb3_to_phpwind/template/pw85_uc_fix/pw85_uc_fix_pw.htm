@@ -1,0 +1,180 @@
+<!--<?php print <<<EOT
+-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gbk" />
+<title>PHPWIND{$pw_version}用户中心整合维护程序</title>
+<link rel="stylesheet" type="text/css" href="template/style.css" />
+<link rel="stylesheet" type="text/css" href="template/{$dbtype}/{$dbtype}.css" />
+<script type="text/javascript" src="template/global.js"></script>
+</head>
+<body>
+<div>
+	<div id="titlebar">PHPWIND{$pw_version}用户中心整合,更新用户UID和用户名的程序</div>
+<!--
+EOT;
+if ($submitted){print <<<EOT
+-->
+	<form action="{$basename}?action=compile&dbtype={$dbtype}&a=convert" name="form" method="post">
+	<div class="content">
+		<table width="100%" align="center" cellspacing="0" cellpadding="5">
+			<tr>
+				<td colspan="2" class="tdheader">选择转换内容</td>
+			</tr>
+			<tr>
+				<td colspan="2" style="padding:10px;"><span class="b">提醒：由于转换步骤之间可能会有关联性，在非确认的情况下请选择全部转换。</span></td>
+			</tr>
+<!--
+EOT;
+foreach ($step_data as $k => $v){print <<<EOT
+-->
+			<tr>
+				<td width="20%">{$v}</td>
+				<td>
+                 <input type="checkbox" name="dostep[]" value="{$k}" checked='checked' class="checkbox" />
+                </td>
+			</tr>	
+<!--
+EOT;
+} print <<<EOT
+-->
+		</table>
+	</div>
+	<div id="submitlinks"><input type="submit" name="submit" value="开始转换"></div>
+	</form>
+<!--
+EOT;
+} else {print <<<EOT
+-->
+	<div class="content"><strong>转换说明</strong>
+		<dl>
+			<dd>
+				<ol>
+<li>主数据：<font color=red><b>PHPWind A</b></font> / 次数据：<font color=blue><b>PHPWind B</b></font></li>
+			
+<li>使用背景：<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;现有两个phpwind85的站点，各有自己的用户和板块帖子等数据，想通过pw后台的用户中心实现用户打通，基本数据同步、主站和从站同步登陆退出。那么需要通过本程序，将从站的用户合并到主站用户数据，并更新从站的用户信息</li>
+
+<li>目 的 ：用户中心整合前，实现将"从站数据库"中的用户数据合并到"主站数据库"中，并更新从站所有有关UID和用户名的数据，实现用户中心的整合</li>
+
+<li>条 件 ：<br>
+      1、支持数据库在不同服务器上，数据库支持远程访问即可<br>
+      2、数据库编码最好相同，理论上已支持数据库编码转换</li>
+
+<li>步骤:<br>
+      1、在转换程序放在服务器可访问的目录下即可<br>
+	  2、[头像附件]请将<font color=red><b>从论坛</b></font>的attachment/upload文件夹移动到 pwb根目录，且设定权限为777；在pwb根目录下创建attachment/upload文件夹,且设定权限为777";<br>
+	  3、备份数据库，非常重要以备合并出错后可随时恢复。（可使用论坛自带的数据备份程序也可以使用mysqladministrator,推荐二个软件都备份一次。）<br>
+      4、在地址栏运行合并程序(http://bbs.xxx.com/pwb/index.html)，过程中有相关提示。</li>
+
+<li>注意: 程序进行中请勿终止，以免丢失数据<br>
+      1.运行程序前，请备份好数据库，以免错误操作导致数据丢失<br>
+      2.运行程序中，请勿终止程序进行，若不小心，请利用备份恢复后重新运行<br>
+      3.程序只能运行一次，如果多次运行将会导致数据出错。<br>
+      4.第一次运行出错后需还原数据库重新开始 </li>
+				</ol>
+			</dd>
+		</dl>
+	</div>
+	<form action="{$basename}?action=compile&dbtype={$dbtype}&a=config" name="form" method="post">
+	<div class="content">
+		<table width="100%" align="center" cellspacing="0" cellpadding="5">
+			<tr>
+				<td colspan="2" class="tdheader">"<font color=red>PHPWIND A <b>主数据库</b></font>"配置参数 (*号必填)。如遇不清楚的项目请与您的空间商联系。</td>
+			</tr>
+			<!-- phpwind A -->
+			<tr>
+				<td width="20%">数据库地址(<font color="red">*</font>)</td>
+				<td><input type="text" name="pw_db_host" size="20" value="localhost" value="$pw_db_host"  />&nbsp;一般为 localhost，如果端口非3306，请加上端口号，如：localhost:3307</td>
+			</tr>
+			<tr>
+				<td width="20%">数据库用户名(<font color="red">*</font>)</td>
+				<td><input type="text" name="pw_db_user" size="20" value="$pw_db_user" />&nbsp;</td>
+			</tr>
+			<tr>
+				<td width="20%">数据库用户密码(<font color="red">*</font>)</td>
+				<td><input type="text" name="pw_db_password" size="20" value="$pw_db_password" />&nbsp;</td>
+			</tr>
+			<tr>
+				<td width="20%">数据库名(<font color="red">*</font>)</td>
+				<td><input type="text" name="pw_db_name" size="20" value="$pw_db_name" />&nbsp;</td>
+			</tr>
+			<tr>
+				<td width="20%">数据库表前缀(<font color="red">*</font>)</td>
+				<td><input type="text" name="pw_prefix" size="20" value="pw_" value="$pw_prefix" />&nbsp;默认为：pw_</td>
+			</tr>
+			<tr>
+				<td width="20%">数据库字符集(<font color="red">*</font>)</td>
+				<td><select name="dest_charset"><option value="gbk" selected="selected">gbk</option><option value="utf8">utf-8</option><option value="big5">big5</option><option value="latin1">latin1</option></select>&nbsp;建议源程序和安装的PHPWIND编码尽量保持一致，否则可能会出现不可预料的情况。</td>
+			</tr>
+		</table>
+		<!-- phpwind B -->
+		<table width="100%" align="center" cellspacing="0" cellpadding="5">
+			<tr>
+				<td colspan="2" class="tdheader">"<font color=blue>PHPWIND B <b>从数据库</b></font>"配置参数 (*号必填)。如遇不清楚的项目请与您的空间商联系。</td>
+			</tr>
+			<tr>
+				<td width="20%">数据库地址(<font color="red">*</font>)</td>
+				<td><input type="text" name="source_db_host" size="20" value="localhost" value="$source_db_host" />&nbsp;留空同 PHPWIND 配置</td>
+			</tr>
+			<tr>
+				<td width="20%">数据库用户名(<font color="red">*</font>)</td>
+				<td><input type="text" name="source_db_user" size="20" value="$source_db_user" />&nbsp;留空同 PHPWIND 配置</td>
+			</tr>
+			<tr>
+				<td width="20%">数据库用户密码(<font color="red">*</font>)</td>
+				<td><input type="text" name="source_db_password" size="20" value="$source_db_password" />&nbsp;留空同 PHPWIND 配置</td>
+			</tr>
+			<tr>
+				<td width="20%">数据库名(<font color="red">*</font>)</td>
+				<td><input type="text" name="source_db_name" size="20" value="$source_db_name" />&nbsp;留空同 PHPWIND 配置</td>
+			</tr>
+			<tr>
+				<td width="20%">数据库表前缀(<font color="red">*</font>)</td>
+				<td><input type="text" name="source_prefix" size="20" value="pw_" value="$source_prefix" />
+				&nbsp;默认为：pw_</td>
+			</tr>
+			<tr>
+				<td width="20%">数据库字符集(<font color="red">*</font>)</td>
+				<td><select name="source_charset"><option value="gbk" selected="selected">gbk</option><option value="utf8">utf-8</option><option value="big5">big5</option><option value="latin1">latin1</option></select>&nbsp;建议源程序和安装的PHPWIND编码尽量保持一致，否则可能会出现不可预料的情况。</td>
+			</tr>
+			<tr>
+				<td width="20%">页面编码(<font color="red">*</font>)</td>
+				<td><select name="page_charset"><option value="gbk" selected="selected">gbk</option><option value="utf8">utf-8</option><option value="big5">big5</option></select>&nbsp;一般情况下请保持与数据库编码一致。</td>
+			</tr>
+		</table>
+		<table width="100%" align="center" cellspacing="0" cellpadding="5">
+			<tr>
+				<td colspan="2" class="tdheader">处理</td>
+			</tr>
+			<tr>
+				<td width="20%">用户名相同的前缀</td>
+				<td><input type="text" size="20" value="new_" id="repeatname" name="repeatname">&nbsp;默认为“new_”</td>
+			</tr>
+			<tr>
+				<td width="20%">每次批量处理记录数</td>
+				<td><input type="text" name="percount" size="20" value="1000" />&nbsp;默认为“1000”</td>
+			</tr>
+			<tr>
+				<td width="20%">据说会提高转换效率</td>
+				<td><input type="radio" name="speed" value="0" checked="checked">否 <input type="radio" name="speed" value="1">是 &nbsp;不过服务器环境配置没设好的话用不了，与上面批量处理结合使用更佳，可将上面调整为10000</td>
+			</tr>
+		</table>
+	</div>
+	<div id="submitlinks"><input type="hidden" name="submitted" value="1"><input type="reset" name="reset" value="重新配置">&nbsp;&nbsp;<input type="submit" name="submit" value="下一步">
+	  <input name="doversy" type="hidden" id="doversy" value="discuz_x1" />
+	</div>
+	</form>
+<!--
+EOT;
+} print <<<EOT
+-->
+	<div id="comments">插件制作: <strong><a href="http://www.phpwind.net/" target="_blank">PHPWind.com</a></strong></div>
+	<div id="copyright"> Copyright &copy;2003 - 2009 PHPWind.com All rights reserved.</div>
+</div>
+</body>
+</html>
+<!--
+EOT;
+?>-->

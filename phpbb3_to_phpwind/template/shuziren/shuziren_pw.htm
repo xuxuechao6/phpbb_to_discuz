@@ -1,0 +1,183 @@
+<!--<?php print <<<EOT
+-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gbk" />
+<title>数字人论坛 -> PHPWIND {$pw_version} - PHPWIND数据结构</title>
+<link rel="stylesheet" type="text/css" href="template/style.css" />
+<link rel="stylesheet" type="text/css" href="template/{$dbtype}/{$dbtype}.css" />
+<script type="text/javascript" src="template/global.js"></script>
+</head>
+<body>
+<div>
+	<div id="titlebar">数字人论坛 -> PHPWIND {$pw_version} 转换程序</div>
+<!--
+EOT;
+if ($submitted){print <<<EOT
+-->
+	<form action="{$basename}?action=compile&dbtype={$dbtype}&a=convert" name="form" method="post">
+	<div class="content">
+		<table width="100%" align="center" cellspacing="0" cellpadding="5">
+			<tr>
+				<td colspan="2" class="tdheader">选择转换内容</td>
+			</tr>
+			<tr>
+				<td colspan="2" style="padding:10px;"><span class="b">提醒：由于转换步骤之间可能会有关联性，在非确认的情况下请选择全部转换。</span></td>
+			</tr>
+<!--
+EOT;
+foreach ($step_data as $k => $v){print <<<EOT
+-->
+			<tr>
+				<td width="20%">{$v}</td>
+				<td><input type="checkbox" name="dostep[]" value="{$k}" checked="checked" class="checkbox" /></td>
+			</tr>	
+<!--
+EOT;
+} print <<<EOT
+-->
+		</table>
+	</div>
+	<div id="submitlinks"><input type="submit" name="submit" value="开始转换"></div>
+	</form>
+<!--
+EOT;
+} else {print <<<EOT
+-->
+	<div class="content"><strong>转换说明</strong>
+		<dl>
+			<dd>
+				<ol>
+					<li>本程序只对数据作转换，不会对原来的 数字人论坛  数据造成破坏，如果担心 数字人论坛  数据丢失，请先作备份，我们不会对任何此类型的数据丢失负责。</li>
+					<li>转换之前请先确认您的服务器已经支持 PHP + MYSQL，如果您还未配置运行环境，我们推荐使用 PHPWind 官方制作的集成安装环境。<br /><br />Windows：<a href="http://www.phpwind.net/read-htm-tid-203668.html" target="_blank">PHPWind Wamp 3.0 正式版</a><br /><br />Linux：<a href="http://www.phpwind.net/read-htm-tid-203668.html" target="_blank">PHPWind LAMP 1.0 正式版</a></li>
+					<li><span class="r">转换程序会清空 PHPWIND {$pw_version} 的数据</span>。转换之前请先安装 PHPWIND {$pw_version}。您可以通过以下连接获得<span class="r">PHPWIND最新版本</span>：<a href="http://www.phpwind.com/download.php" target="_blank">http://www.phpwind.com/download.php</a>。</li>
+					<li>将转换程序以 <span class="b">2进制</span> 方式上传到服务器，运行转换程序：http://您的域名/pwbuilder</li>
+					<li>转换的内容：
+<!--
+EOT;
+foreach ($step_data as $k => $v){print <<<EOT
+if($k!)
+-->
+{$v},
+<!--
+EOT;
+} print <<<EOT
+-->
+					</li>
+					<li>由于转换过程非常消耗资源，所以建议您尽量在服务器空闲期间进行。</li>
+					<li>正常情况下，转换过程是全自动的，您无需干预，如果转换过程中程序终止运行，<span class="b">请根据出错提示信息进行调整</span>，然后刷新页面继续进行转换。</li>
+					<li><span class="g">请勿将本程序用于商业用途，您可以自由传播它，但务必保留我们的版权信息。</span></li>
+					<li>如果您使用本程序则表明您已接受以上声明。</li>
+				</ol>
+			</dd>
+
+		</dl>
+	</div>
+<form action="{$basename}?action=compile&dbtype={$dbtype}&a=config" name="form" method="post">
+	<div class="content">
+		<table width="100%" align="center" cellspacing="0" cellpadding="5">
+			<tr>
+				<td colspan="2" class="tdheader">PHPWIND 配置参数 (*号必填)。如遇不清楚的项目请与您的空间商联系。</td>
+			</tr>
+			<!-- phpwind -->
+			<tr>
+				<td width="20%">数据库地址(<font color="red">*</font>)</td>
+				<td><input type="text" name="pw_db_host" size="20" value="localhost" />&nbsp;一般为 localhost，如果端口非3306，请加上端口号，如：localhost:3307</td>
+			</tr>
+			<tr>
+				<td width="20%">数据库用户名(<font color="red">*</font>)</td>
+				<td><input type="text" name="pw_db_user" size="20" />&nbsp;</td>
+			</tr>
+			<tr>
+				<td width="20%">数据库用户密码(<font color="red">*</font>)</td>
+				<td><input type="text" name="pw_db_password" size="20" />&nbsp;</td>
+			</tr>
+			<tr>
+				<td width="20%">数据库名(<font color="red">*</font>)</td>
+				<td><input type="text" name="pw_db_name" size="20" />&nbsp;</td>
+			</tr>
+			<tr>
+				<td width="20%">数据库表前缀(<font color="red">*</font>)</td>
+				<td><input type="text" name="pw_prefix" size="20" value="pw_" />&nbsp;默认为：pw_</td>
+			</tr>
+			<tr>
+				<td width="20%">数据库字符集(<font color="red">*</font>)</td>
+				<td><select name="dest_charset"><option value="gbk" selected="selected">gbk</option><option value="utf8">utf-8</option><option value="big5">big5</option><option value="latin1">latin1</option></select>&nbsp;建议源程序和安装的PHPWIND编码尽量保持一致，否则可能会出现不可预料的情况。</td>
+			</tr>
+		</table>
+		<!-- source -->
+		<table width="100%" align="center" cellspacing="0" cellpadding="5">
+			<tr>
+				<td colspan="2" class="tdheader">数字人论坛 配置参数 (*号必填)。</td>
+			</tr>
+			<tr>
+				<td width="20%">数据库地址(<font color="red">*</font>)</td>
+				<td><input type="text" name="source_db_host" size="20" />&nbsp;本地用localhost，外地用IP，如果端口非默认，请加上端口号，如：localhost,1433</td>
+			</tr>
+			<tr>
+				<td width="20%">数据库用户名(<font color="red">*</font>)</td>
+				<td><input type="text" name="source_db_user" size="20" />&nbsp;</td>
+			</tr>
+			<tr>
+				<td width="20%">数据库用户密码(<font color="red">*</font>)</td>
+				<td><input type="text" name="source_db_password" size="20" />&nbsp;</td>
+			</tr>
+			<tr>
+				<td width="20%">数据库名(<font color="red">*</font>)</td>
+				<td><input type="text" name="source_db_name" size="20" />&nbsp;</td>
+			</tr>
+			<tr>
+				<td width="20%">数据库表前缀(<font color="red">*</font>)</td>
+				<td><input type="text" name="source_prefix" size="20" value="dbo." />&nbsp;默认为：dbo.</td>
+			</tr>
+			<tr>
+				<td width="20%">转换处理器类型</td>
+				<td><select name="source_class_type"><option value="mssql" selected="selected">MSSQL</option><option value="odbc">ODBC</option></select>&nbsp;默认为MSSQL，如转换不能进行请尝试更换处理器类型。</td>
+			</tr>
+			<tr>
+				<td width="20%">铜币</td>
+				<td><input type="text" name="money" size="20" value="je2" />&nbsp;数字人虚拟币积分,一般不用修改</td>
+			</tr>
+			<tr>
+				<td width="20%">分类信息帖子目标自定义分类版块</td>
+				<td><input type="text" name="category_id" size="20" value="9998" />&nbsp;分类版块fid</td>
+			</tr>
+			<tr>
+				<td width="20%">分类信息帖子目标自定义版块</td>
+				<td><input type="text" name="cate_fid" size="20" value="9999" />&nbsp;版块fid</td>
+			</tr>
+			<tr>
+				<td width="20%">每次批量处理记录数</td>
+				<td><input type="text" name="percount" size="20" value="1000" />&nbsp;默认为“1000”</td>
+			</tr>
+		</table>
+		<table width="100%" align="center" cellspacing="0" cellpadding="5">
+			<tr>
+				<td colspan="2" class="tdheader">数字人论坛 -> PHPWIND {$pw_version} 备注说明</td>
+			</tr>
+			<tr><td colspan="2">-----------------------------附件移动---------------------------<br><br>
+
+1、将数字人/tp“文件夹下”的所有文件夹和文件移动到pw/attachment文件夹下(包含论坛附件)<br>
+2、默认头像附件：将数字人tp/face文件夹覆盖到phpwind/images/face文件夹<br>
+3、相册附件：将数字人tp/photo文件夹覆盖到pw/attachment/photo文件夹<br>
+4、商圈logo附件：
+<br>默认logo附件请在pw/attachment文件夹下新建一个文件夹info，并将数字人论坛根目录info/image文件夹移动到pw/attachment/info文件夹下；<br>自定义商家的logo附件在tp/qiye文件夹下，如果上面第一步操作了就不需要另外移动了；自定义logo目录最终为pw/attachment/qiye文件夹。<br>
+<br>
+<font color=red>最后为了节省空间，可以将pw/attachment下和其他以上重复的附件目录删除，比如相册photo、头像face</font></td></tr>
+		</table>
+		</div>
+	<div id="submitlinks"><input type="hidden" name="submitted" value="1"><input type="reset" name="reset" value="重新配置">&nbsp;&nbsp;<input type="submit" name="submit" value="下一步"></div>
+	</form>
+<!--
+EOT;
+} print <<<EOT
+-->
+	<div id="comments">插件制作: <strong><a href="http://www.phpwind.net/" target="_blank">PHPWind.com</a></strong></div>
+	<div id="copyright"> Copyright &copy;2003 - 2009 PHPWind.com All rights reserved.</div>
+</div>
+</body>
+</html>
+<!--
+EOT;
+?>-->

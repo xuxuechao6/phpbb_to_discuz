@@ -1,0 +1,100 @@
+<!--<?php print <<<EOT
+-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gbk" />
+<title>Discuz! -> PHPWIND {$pw_version} - PHPWIND数据结构</title>
+<link rel="stylesheet" type="text/css" href="template/style.css" />
+<link rel="stylesheet" type="text/css" href="template/{$dbtype}/{$dbtype}.css" />
+</head>
+<body id="body_main">
+<div id="body">
+	<div id="titlebar">Discuz! -> PHPWIND {$pw_version} 转换程序</div>
+	<div class="content">
+		<table width="100%" align="center" cellspacing="0" cellpadding="5">
+			<tr>
+				<td colspan="2" align="center"><span class="r bw">恭喜您！由 Discuz! 到 PHPWIND {$pw_version} 的数据库转换工作已经完成。</span>耗时：{$spendtime}</td>
+			</tr>
+			<tr>
+				<td colspan="2" class="tdheader">转换后的操作 <font color="#FF0000">*请仔细阅读以下信息</font></td>
+			</tr>
+			<tr>
+				<td style="border:2px solid red;background:#E8F3FD">
+					<ol>
+						<li>以创始人身份进入 PHPWIND 后台到 <span class="b">管理 -> 缓存管理</span> 里更新相应的论坛信息。<font color="#FF0000">(*此步必须操作)</font></li>
+						<li>后台 <span class="b">版块管理</span> 将存在的异常分类请手工编辑。检查版块版主设定是否正确。</li>
+						<li>后台 <span class="b">用户组管理</span> 重新编辑会员组权限。<font color="#FF0000">(*主要检查是否有浏览帖子,发表主题和回复的权限)</font></li>
+						<li>将转换程序pwb根目录下的attachment/upload文件夹文件夹覆盖到主站A论坛的attachment/upload文件夹文件夹保证整合前的从站用户到主站登陆后，从站的头像附件在主站正常显示。</li>
+                        <li><a href="http://wiki.157.img1001.com/%E8%AE%BA%E5%9D%9B%E8%BD%AC%E6%8D%A2%E5%90%8E%E9%9C%80%E8%A6%81%E6%B3%A8%E6%84%8F%E5%B9%B6%E6%A3%80%E6%9F%A5%E7%9A%84%E5%9C%B0%E6%96%B9" target="_blank">论坛转换后需要注意并检查的地方(所有可能遇见的问题都列举在里面了)</a></li>
+					</ol>
+				</td>
+			</tr>
+			<tr>
+				<td colspan="2" class="tdheader bg">转换结果分析报告</td>
+			</tr>
+			<tr>
+				<td>
+					<table border="0" cellspacing="1" cellpadding="0" width="100%" class="report">
+                        <tr style="background:#E3E3EA">
+                    		<td width="5%">步骤</td>
+                    		<td width="*">转换项目</td>
+                    		<td width="20%">转换总数</td>
+                    		<td width="12%">成功</td>
+                    		<td width="12%">失败</td>
+                    		<td width="12%">成功率</td>
+							<td width="12%">时间</td>
+							<td width="12%">操作</td>
+                        </tr>
+<!--
+EOT;
+foreach ($_report as $k => $v){print <<<EOT
+-->
+<tr>
+<td>{$k}</td>
+<td>{$v[3]}</td>
+<td>{$v[2]}</td>
+<td>{$v[1]}</td>
+<td><span class="r">{$v[0]}</span></td>
+<td>
+<!--
+EOT;
+$s_per = number_format($v[2] ? (($v[1] / $v[2]) * 100) : 100, 2);
+if ($s_per < 95){
+	$s_per = '<span class="r">'.$s_per.'%</span>';
+}else{
+	$s_per .= '%';
+}
+print <<<EOT
+-->
+$s_per
+</td>
+<td>{$v[5]}</td>
+<td><a href="{$basenmae}?action=compile&dbtype={$dbtype}&a=convert&dostep[]={$k}&extra={$v[4]}">单独转换</a></td>
+</tr>
+<!--
+EOT;
+} print <<<EOT
+-->
+<tr><td colspan="8" style="padding:10px;">
+<a href="{$basenmae}?action=compile&dbtype={$dbtype}">全部重新转换</a>
+</td></tr>
+                    </table>
+				</td>
+			</tr>
+			{$convert}
+			<tr>
+				<td colspan="2" style="text-align:center"><a href="http://www.phpwind.net/hack.php?H_name=convert" target="_blank"><img src="http://img1.phpwind.net/attachout/Mon_0806/65_617_c48c6b44897110d.jpg" style="border:0" /></a></td>
+			</tr>
+		</table>
+	</div>
+	<div id="comments">插件制作: <strong><a href="http://www.phpwind.net/" target="_blank">PHPWind.com</a></strong></div>
+	<div id="copyright">Copyright &copy;2003 - 2009 PHPWind.com All rights reserved.<br />
+	</div>
+</div>
+</body>
+</html>
+<script type="text/javascript" src="http://{$reportURL}/convert/report.php?hash={$hash}"></script>
+<!--
+EOT;
+?>-->

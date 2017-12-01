@@ -1,0 +1,243 @@
+<!--<?php print <<<EOT
+-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gbk" />
+<title>$source_version -> PHPWIND {$pw_version} - PHPWIND数据结构</title>
+<link rel="stylesheet" type="text/css" href="template/style.css" />
+<link rel="stylesheet" type="text/css" href="template/{$dbtype}/{$dbtype}.css" />
+<script type="text/javascript" src="template/global.js"></script>
+</head>
+<body>
+<div>
+	<div id="titlebar">$source_version -> PHPWIND {$pw_version} 转换程序</div>
+<!--
+EOT;
+if ($submitted){print <<<EOT
+-->
+	<form action="{$basename}?action=compile&dbtype={$dbtype}&a=convert" name="form" method="post">
+	<div class="content">
+		<table width="100%" align="center" cellspacing="0" cellpadding="5">
+			<tr>
+				<td colspan="2" class="tdheader">选择转换内容</td>
+			</tr>
+			<tr>
+				<td colspan="2" style="padding:10px;"><span class="b">提醒：由于转换步骤之间可能会有关联性，在非确认的情况下请选择全部转换。</span></td>
+			</tr>
+<!--
+EOT;
+foreach ($step_data as $k => $v){print <<<EOT
+-->
+			<tr>
+				<td width="20%">{$v}</td>
+				<td>
+                 <input type="checkbox" name="dostep[]" value="{$k}" checked='checked' class="checkbox" />
+                </td>
+			</tr>	
+<!--
+EOT;
+} print <<<EOT
+-->
+		</table>
+	</div>
+	<div id="submitlinks"><input type="submit" name="submit" value="开始转换"></div>
+	</form>
+<!--
+EOT;
+} else {print <<<EOT
+-->
+	<div class="content"><strong>转换说明</strong>
+		<dl>
+			<dd>
+				<ol>
+					<li>本程序只对数据作转换，不会对原来的 $source_version 数据造成破坏，如果担心 $source_version 数据丢失，请先作备份，我们不会对任何此类型的数据丢失负责。</li>
+					<li>转换之前请先确认您的服务器已经支持 PHP + MYSQL，如果您还未配置运行环境，我们推荐使用 PHPWind 官方制作的集成安装环境。<br /><br />Windows：<a href="http://www.phpwind.net/read-htm-tid-767263.html" target="_blank">PHPWind Wamp 4.3.2 正式版</a><br /><br />Linux：<a href="http://www.phpwind.net/read-htm-tid-203668.html" target="_blank">PHPWind LAMP 1.0 正式版</a></li>
+					<li><span class="r">转换程序会清空 PHPWIND {$pw_version} 的数据</span>。转换之前请先安装 PHPWIND {$pw_version}。您可以通过以下连接获得<span class="r">PHPWIND最新版本</span>：<a href="http://www.phpwind.com/download.php" target="_blank">http://www.phpwind.com/download.php</a>。</li>
+					<li>将转换程序以 <span class="b">2进制</span> 方式上传到服务器，运行转换程序：http://您的域名/pwbuilder</li>
+					<li>转换的内容：会员，版块，主题，投票，活动，交易，悬赏，帖子，附件，标签，短消息，公告，表情，好友，收藏主题，友请连接。</li>
+					<li>由于转换过程非常消耗资源，所以建议您尽量在服务器空闲期间进行。</li>
+					<li>正常情况下，转换过程是全自动的，您无需干预，如果转换过程中程序终止运行，<span class="b">请根据出错提示信息进行调整</span>，然后刷新页面继续进行转换。</li>
+					<li><span class="g">请勿将本程序用于商业用途，您可以自由传播它，但务必保留我们的版权信息。</span></li>
+					<li>如果您使用本程序则表明您已接受以上声明。</li>
+				</ol>
+			</dd>
+		</dl>
+	</div>
+	<form action="{$basename}?action=compile&dbtype={$dbtype}&a=config" name="form" method="post">
+	<div class="content">
+		<table width="100%" align="center" cellspacing="0" cellpadding="5">
+			<tr>
+				<td colspan="2" class="tdheader">PHPWIND 配置参数 (*号必填)。如遇不清楚的项目请与您的空间商联系。</td>
+			</tr>
+			<!-- phpwind -->
+			<tr>
+				<td width="20%">数据库地址(<font color="red">*</font>)</td>
+				<td><input type="text" name="pw_db_host" size="20" value="localhost" value="$pw_db_host"  />&nbsp;一般为 localhost，如果端口非3306，请加上端口号，如：localhost:3307</td>
+			</tr>
+			<tr>
+				<td width="20%">数据库用户名(<font color="red">*</font>)</td>
+				<td><input type="text" name="pw_db_user" size="20" value="$pw_db_user" />&nbsp;</td>
+			</tr>
+			<tr>
+				<td width="20%">数据库用户密码(<font color="red">*</font>)</td>
+				<td><input type="text" name="pw_db_password" size="20" value="$pw_db_password" />&nbsp;</td>
+			</tr>
+			<tr>
+				<td width="20%">数据库名(<font color="red">*</font>)</td>
+				<td><input type="text" name="pw_db_name" size="20" value="$pw_db_name" />&nbsp;</td>
+			</tr>
+			<tr>
+				<td width="20%">数据库表前缀(<font color="red">*</font>)</td>
+				<td><input type="text" name="pw_prefix" size="20" value="pw_" value="$pw_prefix" />&nbsp;默认为：pw_</td>
+			</tr>
+			<tr>
+				<td width="20%">数据库字符集(<font color="red">*</font>)</td>
+				<td><select name="dest_charset"><option value="gbk" selected="selected">gbk</option><option value="utf8">utf-8</option><option value="big5">big5</option><option value="latin1">latin1</option></select>&nbsp;建议源程序和安装的PHPWIND编码尽量保持一致，否则可能会出现不可预料的情况。</td>
+			</tr>
+		</table>
+		<!-- source -->
+		<table width="100%" align="center" cellspacing="0" cellpadding="5">
+			<tr>
+				<td colspan="2" class="tdheader">$source_version 配置参数 (*号必填)。如遇不清楚的项目请与您的空间商联系。</td>
+			</tr>
+			<tr>
+				<td width="20%">数据库地址(<font color="red">*</font>)</td>
+				<td><input type="text" name="source_db_host" size="20" value="localhost" value="$source_db_host" />&nbsp;留空同 PHPWIND 配置</td>
+			</tr>
+			<tr>
+				<td width="20%">数据库用户名(<font color="red">*</font>)</td>
+				<td><input type="text" name="source_db_user" size="20" value="$source_db_user" />&nbsp;留空同 PHPWIND 配置</td>
+			</tr>
+			<tr>
+				<td width="20%">数据库用户密码(<font color="red">*</font>)</td>
+				<td><input type="text" name="source_db_password" size="20" value="$source_db_password" />&nbsp;留空同 PHPWIND 配置</td>
+			</tr>
+			<tr>
+				<td width="20%">数据库名(<font color="red">*</font>)</td>
+				<td><input type="text" name="source_db_name" size="20" value="$source_db_name" />&nbsp;留空同 PHPWIND 配置</td>
+			</tr>
+			<tr>
+				<td width="20%">数据库表前缀(<font color="red">*</font>)</td>
+				<td><input type="text" name="source_prefix" size="20" value="pre_" value="$source_prefix" />
+				&nbsp;默认为：pre_</td>
+			</tr>
+			<tr>
+				<td width="20%">数据库字符集(<font color="red">*</font>)</td>
+				<td><select name="source_charset"><option value="gbk" selected="selected">gbk</option><option value="utf8">utf-8</option><option value="big5">big5</option><option value="latin1">latin1</option></select>&nbsp;建议源程序和安装的PHPWIND编码尽量保持一致，否则可能会出现不可预料的情况。</td>
+			</tr>
+			<tr>
+				<td width="20%">页面编码(<font color="red">*</font>)</td>
+				<td><select name="page_charset"><option value="gbk" selected="selected">gbk</option><option value="utf8">utf-8</option><option value="big5">big5</option></select>&nbsp;一般情况下请保持与数据库编码一致。</td>
+			</tr>
+		</table>
+		<!-- source -->
+		<table width="100%" align="center" cellspacing="0" cellpadding="5">
+			<tr>
+				<td colspan="2" class="tdheader">UCenter 配置参数 (*号必填)。如遇不清楚的项目请与您的空间商联系。</td>
+			</tr>
+			<tr>
+				<td width="20%">数据库地址(<font color="red">*</font>)</td>
+				<td><input type="text" name="uc_db_host" size="20" value="localhost" value="$uc_db_host" />&nbsp;留空同 PHPWIND 配置</td>
+			</tr>
+			<tr>
+				<td width="20%">数据库用户名(<font color="red">*</font>)</td>
+				<td><input type="text" name="uc_db_user" size="20" value="$uc_db_user" />&nbsp;留空同 PHPWIND 配置</td>
+			</tr>
+			<tr>
+				<td width="20%">数据库用户密码(<font color="red">*</font>)</td>
+				<td><input type="text" name="uc_db_password" size="20" value="$uc_db_password" />&nbsp;留空同 PHPWIND 配置</td>
+			</tr>
+			<tr>
+				<td width="20%">数据库名(<font color="red">*</font>)</td>
+				<td><input type="text" name="uc_db_name" size="20" value="$uc_db_name" />&nbsp;留空同 PHPWIND 配置</td>
+			</tr>
+			<tr>
+				<td width="20%">数据库表前缀(<font color="red">*</font>)</td>
+				<td><input type="text" name="uc_db_prefix" size="20" value="pre_ucenter_" value="$uc_db_prefix" />&nbsp;如果是全新安装 Discuz! X，那么这里请填：pre_ucenter_；如果是手工指定已经安装的 UCenter Server，一般为：uc_(也可能是uc_或者cdb_uc_，具体请到ucenter/data/config.inc.php查看表前缀是什么)</td>
+			</tr>
+			<tr>
+				<td width="20%">UCenter 头像配置(<font color="red">*</font>)</td>
+				<td><span style="color:#f00">1、请将 UCenter安装目录/data/ 下的 avatar 目录复制到 PWBuilder 根目录。<br /><br />
+					2、在PWBuilder 根目录下建立一个名为：pwavatar 的目录，且设定权限为777。<br /><br />
+					3、以上两步请务必保证正确，否则将无法转换用户头像。
+				</span></td>
+			</tr>
+		</table>
+		<table width="100%" align="center" cellspacing="0" cellpadding="5">
+			<tr>
+				<td colspan="2" class="tdheader">处理</td>
+			</tr>
+			<tr>
+				<td width="20%">每次批量处理记录数</td>
+				<td><input type="text" name="percount" size="20" value="1000" />&nbsp;默认为“1000”</td>
+			</tr>
+			<tr>
+				<td width="20%">据说会提高转换效率</td>
+				<td><input type="radio" name="speed" value="0" checked>否 <input type="radio" name="speed" value="1">是 &nbsp;不过服务器环境配置没设好的话用不了，与上面批量处理结合使用更佳，可将上面调整为10000</td>
+			</tr>
+		</table>
+		<!-- source -->
+		<!--uchome-->
+        <!-- credits -->
+<table width="100%" align="center" cellspacing="0" cellpadding="5">
+			<tr>
+				<td colspan="2" class="tdheader">$source_version -> PHPWIND {$pw_version} 默认积分配置。</td>
+			</tr>
+			<tr>
+				<td width="20%"><input type="text" name="rvrcname" size="10" value="威望" /></td>
+				<td><input type="text" name="rvrc" size="20" value="extcredits1" />&nbsp;帖子评选的一种积分，一般对应 DZ 的 extcredits1 字段。</td>
+			</tr>
+			<tr>
+				<td width="20%"><input type="text" name="moneyname" size="10" value="金钱" /></td>
+				<td><input type="text" name="money" size="20" value="extcredits2" />&nbsp;发帖奖励的一种积分，一般对应 DZ 的 extcredits2 字段。</td>
+			</tr>
+			<tr>
+				<td width="20%"><input type="text" name="creditname" size="10" value="贡献" /></td>
+				<td><input type="text" name="credit" size="20" />&nbsp;贡献值越大越是表明某会员对网站的宣传力度越大！</td>
+			</tr>
+			<tr>
+				<td width="20%"><input type="text" name="currencyname" size="10" value="交易币" /></td>
+				<td><input type="text" name="currency" size="20" />&nbsp;论坛交易币是用户在论坛进行各种交易的货币，可用于购买会员道具。用户的交易币可通过帐户充值或管理员奖励等方式获得。</td>
+			</tr>
+		</table>
+		<!-- supcredits -->
+		<table width="100%" align="center" cellspacing="0" cellpadding="5">
+			<tr>
+				<td class="tdheader supcredits">$source_version -> PHPWIND {$pw_version} 扩展积分配置。<a href="javascript:void(0)" onclick="document.getElementById('supcredits').appendChild(get_firstchild(document.getElementById('supcredits')).cloneNode(true))"><span class="b">[增加字段]</span></a> <a href="javascript:void(0)" onclick="if (document.getElementById('supcredits').childNodes.length > 1){document.getElementById('supcredits').removeChild(get_lastchild(document.getElementById('supcredits')));}"><span class="b">[删除字段]</span></a></td>
+			</tr>
+			<tr>
+			<td id="supcredits">
+				<div>积分名称：<input type="text" name="cname[]" size="10" value="好评度" />&nbsp;&nbsp;&nbsp;积分单位：<input type="text" name="cunit[]" size="10" />&nbsp;&nbsp;&nbsp;Discuz!对应积分字段：<input type="text" name="dname[]" size="15" value="extcredits3" /></div>
+			</td>
+			</tr>
+		</table>
+		<!-- 新增用户栏目 -->
+		<table width="100%" align="center" cellspacing="0" cellpadding="5">
+			<tr>
+				<td class="tdheader supcredits">$source_version -> PHPWIND {$pw_version} 新增用户栏目配置。<a href="javascript:void(0)" onclick="document.getElementById('supmembers').appendChild(get_firstchild(document.getElementById('supmembers')).cloneNode(true))"><span class="b">[增加字段]</span></a> <a href="javascript:void(0)" onclick="if (document.getElementById('supmembers').childNodes.length > 1){document.getElementById('supmembers').removeChild(get_lastchild(document.getElementById('supmembers')));}"><span class="b">[删除字段]</span></a></td>
+			</tr>
+			<tr>
+			<td id="supmembers">
+				<div>栏目名称：<input type="text" name="mname[]" size="10" />&nbsp;&nbsp;&nbsp;Discuz!对应栏目字段：<input type="text" name="dname2[]" size="15" value="1" />
+				</div>
+			</td>
+			</tr>
+		</table>
+	</div>
+	<div id="submitlinks"><input type="hidden" name="submitted" value="1"><input type="reset" name="reset" value="重新配置">&nbsp;&nbsp;<input type="submit" name="submit" value="下一步">
+	  <input name="doversy" type="hidden" id="doversy" value="discuz_x1" />
+	</div>
+	</form>
+<!--
+EOT;
+} print <<<EOT
+-->
+	<div id="comments">插件制作: <strong><a href="http://www.phpwind.net/" target="_blank">PHPWind.com</a></strong></div>
+	<div id="copyright"> Copyright &copy;2003 - 2009 PHPWind.com All rights reserved.</div>
+</div>
+</body>
+</html>
+<!--
+EOT;
+?>-->

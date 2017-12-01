@@ -1,0 +1,16 @@
+#body{margin: 10px;}
+a:link, a:visited, a:active{color: #2222BC;text-decoration:none;}
+a:hover{color: #02027C;}
+#body_main{margin: 0px;font: 10pt verdana;}
+input{color:#000;background:#fff;border:1px #ccc solid;line-height:20px;height:20px;}
+.r{color:#f00;font-weight:bold;}
+.button{padding:3px 1em 1px;margin:0 5px;}
+#titlebar{color: #738FBF;font: bold 16pt tahoma;margin-bottom: 20px;border-bottom: 1px solid #0B198C;}
+#copyright{color: #869BBF;text-align: center;margin-top: 20px;font: 11px tahoma;}
+.content{padding-bottom: 20px;border-bottom: 1px solid #0B198C;width:100%;}
+.content ul{margin-top: 2px;}
+.content li{margin: 10px;}
+#comments{margin-top: 30px;border:1px solid #0B198C;padding: 5px;background: #E1E4F2;}
+#comments a:link,#comments a:visited{color: #2222BC;font: 11px tahoma;}
+#submitlinks{font: 11px verdana;margin: 10px 20px;text-align:center;}
+td{text-align:left;font-size:12px;}

@@ -1,0 +1,90 @@
+<!--<?php print <<<EOT
+-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gbk" />
+<title>版权声明 - PHPWIND数据转换平台</title>
+<link rel="stylesheet" type="text/css" href="template/style.css" />
+</head>
+<body>
+
+<div>
+	<div id="titlebar">PWBuilder >> PHPWind 数据转换平台</div>
+	<!--
+EOT;
+if (!$action) { print <<<EOT
+-->
+	<form action="pwbuilder.php?action=chosedb" name="form" method="post">
+		<div class="content"><strong>PHPWind 软件使用协议</strong>
+			<p> 版权所有 &copy; 2003 - 09, PHPWind.com 保留所有权力. <br />
+				<br />
+				PHPWind 由 PHPWind Dev Team 独立开发,全部核心技术归属 PHPWind Dev Team（PHPWind Board在中国国家版权局著作权登记号为:2004SR06082）<br />
+				官方网站为 http://www.phpwind.com 官方论坛为 http://www.phpwind.net<br />
+				本授权协议适用于 PHPWind 任何版本，PHPWind Dev Team 拥有对本授权协议的最终解释权和修改权。<br />
+				<br />
+				PHPWind 网站管理系统 (简称 PW)<br />
+				1 、PHPWind 著作权已在中华人民共和国国家版权局注册，著作权登记号为: 2004SR06082 并受到法律和国际公约保护。如果您需要采用PHPWind系统的部分程序构架其他程序系统，请务必取得我们的同意。否则我们将追究责任!修改后的代码，未经书面许可，严禁公开发布，更不得利用其从事盈利业务。<br />
+				<br />
+				<br />
+				2 、所有用户均可查看PHPWind Board 的全部源代码,也可以根据自己的需要对其进行修改!但无论如何，既无论用途如何、是否经过修改或美化、修改程度如何，只要您使用 PHPWind Board 的任何整体或部分程序算法，都必须保留页脚处的 PHPWind 名称和 http://www.phpwind.net 的链接地址.<br />
+				<br />
+				<br />
+				3 、未经商业授权，不得将本软件用于商业用途(企业网站或以盈利为目的经营性网站)，否则我们将保留追究的权力。<br />
+				有关 PHPWind 授权包含的服务范围，技术支持等，请参看 http://www.phpwind.com <br />
+				对于违反以上条款，或以任何目的复制或发行 PHPWind 的组织或个人，我们将依法追究其责任。<br />
+				<br />
+				<br />
+				免责声明:<br />
+				1 、利用本软件构建的网站的任何信息内容以及导致的任何版权纠纷和法律争议及后果，官方不承担任何责任。<br />
+				2 、损坏包括程序的使用(或无法再使用)中所有一般化,特殊化,偶然性的或必然性的损坏(包括但不限于数据的丢失,自己或第三方所维护数据的不正确修改,和其他程序协作过程中程序的崩溃等),官方不承担任何责任。<br />
+			</p>
+		</div>
+		<div id="submitlinks">
+			<input type="submit" name="submit" value="同意">&nbsp;<input type="button" name="cancel" onclick="self.close();" value="拒绝">
+		</div>
+	</form>
+	<!--
+EOT;
+} elseif ($action == 'chosedb') {
+$dh = opendir(R_P.'source');
+if ($dh) { print <<<EOT
+-->
+	<div class="content"><strong>选择源程序类型</strong>
+		<table width="90%" border="0" cellspacing="0" cellpadding="5" align="center">
+			<tr>
+				<!--
+EOT;
+$i = 1;
+while (($file = readdir($dh)) !== FALSE) {
+if (is_dir(R_P.'source/'.$file) && $file != '.' && $file != '..') {
+print <<<EOT
+-->
+				<td><a href="pwbuilder.php?action=compile&dbtype={$file}">{$file}</a></td>
+				<!--
+EOT;
+if ($i % 5 == 0) {print <<<EOT
+-->
+			</tr>
+			<tr>
+				<!--
+EOT;
+}
+$i++;
+}} print <<<EOT
+-->
+			</tr>
+		</table>
+	</div>
+	<!--
+EOT;
+}} print <<<EOT
+-->
+	<div id="comments">反馈您的建议: <strong><a href="http://www.phpwind.net/thread.php?fid=94" target="_blank">PHPWIND数据转换平台</a></strong></div>
+	<div id="copyright">Copyright &copy;2003 - 2009 PHPWind.com All rights reserved.</div>
+</div>
+</body>
+</html>
+<!--
+EOT;
+?>-->

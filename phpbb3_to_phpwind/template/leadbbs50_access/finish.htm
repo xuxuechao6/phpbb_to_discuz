@@ -1,0 +1,98 @@
+<!--<?php print <<<EOT
+-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gbk" />
+<title>Leadbbs{$source_version} -> PHPWIND {$pw_version} - PHPWIND数据结构</title>
+<link rel="stylesheet" type="text/css" href="template/style.css" />
+<link rel="stylesheet" type="text/css" href="template/{$dbtype}/{$dbtype}.css" />
+</head>
+<body id="body_main">
+<div id="body">
+	<div id="titlebar">Leadbbs{$source_version} -> PHPWIND {$pw_version} 转换程序</div>
+	<div class="content">
+		<table width="100%" align="center" cellspacing="0" cellpadding="5">
+			<tr>
+				<td colspan="2" align="center"><span class="r bw">恭喜您！由 Leadbbs{$source_version} 到 PHPWIND {$pw_version} 的数据库转换工作已经完成。</span>耗时：{$spendtime}</td>
+			</tr>
+			<tr>
+				<td colspan="2" class="tdheader bg">转换结果分析报告</td>
+			</tr>
+			<tr>
+				<td>
+					<table border="0" cellspacing="1" cellpadding="0" width="100%" class="report">
+                        <tr style="background:#E3E3EA">
+                    		<td width="5%">步骤</td>
+                    		<td width="*">转换项目</td>
+                    		<td width="20%">转换总数</td>
+                    		<td width="15%">成功</td>
+                    		<td width="15%">失败</td>
+                    		<td width="15%">成功率</td>
+							<td width="15%">操作</td>
+                        </tr>
+<!--
+EOT;
+foreach ($_report as $k => $v){print <<<EOT
+-->
+<tr>
+<td>{$k}</td>
+<td>{$v[3]}</td>
+<td>{$v[2]}</td>
+<td>{$v[1]}</td>
+<td><span class="r">{$v[0]}</span></td>
+<td>
+<!--
+EOT;
+$s_per = number_format($v[2] ? (($v[1] / $v[2]) * 100) : 100, 2);
+if ($s_per < 95){
+	$s_per = '<span class="r">'.$s_per.'%</span>';
+}else{
+	$s_per .= '%';
+}
+print <<<EOT
+-->
+$s_per
+</td>
+<td><a href="{$basenmae}?action=compile&dbtype={$dbtype}&a=convert&dostep[]={$k}&extra={$v[4]}">单独转换</a></td>
+</tr>
+<!--
+EOT;
+} print <<<EOT
+-->
+<tr><td colspan="7" style="padding:10px;">
+<a href="{$basenmae}?action=compile&dbtype={$dbtype}">全部重新转换</a>
+</td></tr>
+                    </table>
+				</td>
+			</tr>
+			<tr>
+				<td colspan="2" class="tdheader">转换后的操作</td>
+			</tr>
+			<tr>
+				<td>
+					<ol>
+						<li>以创始人身份进入 PHPWIND 后台到 <span class="b">缓存数据管理</span> 里更新相应的论坛信息。</li>
+						<li>手动将 LeadBBS论坛 的附件目录/Images/upload下的文件夹转移到PHPWIND论坛的附件attachment目录下。</li>
+						<li>转移系统头像：LeadBBS默认的系统头像保存在LeadBBS /Images/face目录，PHPWIND论坛系统默认头像目录images/face。提示：如果不想再使用 LeadBBS论坛的系统头像，可以不转移。</li>
+						<li>转移自定义头像：手动将 <span class="r">pwavatar(转换开始时设定)</span> 目录下所有目录文件复制到 PHPWIND 自定义头像目录 attachment/upload。</li>
+						<li>手动将 leadbbs论坛发贴表情 Images下的UBBicon文件夹移动到PW论坛/images/post/smile的目录下</li>
+					</ol>
+				</td>
+			</tr>
+			{$convert}
+			<tr>
+				<td colspan="2" style="text-align:center"><a href="http://www.phpwind.net/hack.php?H_name=convert" target="_blank"><img src="http://img1.phpwind.net/attachout/Mon_0806/65_617_c48c6b44897110d.jpg" style="border:0" /></a></td>
+			</tr>
+		</table>
+	</div>
+	<div id="comments">插件制作: <strong><a href="http://www.phpwind.net/" target="_blank">PHPWind.com</a></strong></div>
+	<div id="copyright">Copyright &copy;2003 - 2009 PHPWind.com All rights reserved.<br />
+	</div>
+</div>
+</body>
+</html>
+<script type="text/javascript" src="http://{$reportURL}/convert/report.php?hash={$hash}"></script>
+<!--
+EOT;
+?>-->
